@@ -1,1 +1,33 @@
-按照某列的值得将Excel工作簿拆分为多个工作簿或工作表
+将一个大工作簿按某列的值拆分为多个工作簿
+```python
+import pandas as pd
+
+df = pd.read_excel(r'D:\拆分示例.xlsx')
+
+cat = df['分类'].unique()
+
+for subcat in cat:
+
+   myfile = df.loc[df['分类'] ==subcat]
+
+   myfile.to_excel('D:\\'+subcat+'.xlsx',index = False)
+```
+拆分为多个工作表
+```python
+import pandas as pd
+
+df = pd.read_excel(r'D:\拆分示例.xlsx')
+
+df1 = df.loc[df['分类'] == '建设项目']
+
+df2 = df.loc[df['分类'] == '电商']
+
+writer1 = pd.ExcelWriter(r'D:\拆分示例.xlsx')
+
+df1.to_excel(writer1, sheet_name = '建设项目', index =False)
+
+df2.to_excel(writer1, sheet_name = '电商', index =False)
+
+writer1.save()
+```
+
