@@ -30,4 +30,3 @@ df2.to_excel(writer1, sheet_name = '电商', index =False)
 
 writer1.save()
 ```
-
